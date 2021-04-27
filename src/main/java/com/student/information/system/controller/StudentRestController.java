@@ -14,6 +14,7 @@ import java.util.List;
 /**
  * @author ragcrix
  */
+@CrossOrigin(allowedHeaders = "*", origins = "*", maxAge = 3600) //or http://localhost:4200
 @RestController
 @RequestMapping("/students")
 public class StudentRestController {
