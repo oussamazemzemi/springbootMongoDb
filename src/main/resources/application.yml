@@ -1,0 +1,13 @@
+logging:
+  level:
+    org:
+      springframework:
+        data: debug
+server:
+  port: 8081
+spring:
+  data:
+    mongodb:
+      database: test
+      host: localhost
+      port: 27017

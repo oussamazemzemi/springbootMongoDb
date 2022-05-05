@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @author ragcrix
+ * @author oz
  */
 public class ObjectMapperUtils {
 

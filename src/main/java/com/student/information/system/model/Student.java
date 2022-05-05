@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.List;
 
 /**
- * @author ragcrix
+ * @author oz
  */
 @Document(collection = "students")
 public class Student {

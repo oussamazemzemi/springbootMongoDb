@@ -3,7 +3,7 @@ package com.student.information.system.dto;
 import java.util.List;
 
 /**
- * @author ragcrix
+ * @author oz
  */
 public class StudentDTO {
 

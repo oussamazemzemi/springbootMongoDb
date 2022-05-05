@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 /**
- * @author ragcrix
+ * @author oz
  */
 
 // No need implementation, just one interface, and you have CRUD, thanks Spring Data!

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * @author ragcrix
+ * @author oz
  */
 @CrossOrigin(allowedHeaders = "*", origins = "*", maxAge = 3600) //or http://localhost:4200
 @RestController
