@@ -43,4 +43,4 @@ EXPOSE 8081
 
 #### Launch command.
 #CMD ["mvn", "--version"]
-CMD ["java","-jar","api-1.0.0-snapshot.jar"]
+CMD ["java","-jar","api-1.0.0-snapshot.jar", "--spring.data.mongodb.host=mongo_db"]
