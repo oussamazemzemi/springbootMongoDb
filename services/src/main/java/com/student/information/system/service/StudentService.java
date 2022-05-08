@@ -5,7 +5,7 @@ import java.util.List;
 import com.student.information.system.model.Student;
 
 /**
- * @author regcrix
+ * @author OZ
  */
 public interface StudentService {
 

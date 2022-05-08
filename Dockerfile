@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-#LABEL ZEMZEMI OUSSAMA <oussama.zemzemi@gmail.com>
+#LABEL Maintainer=oussama.zemzemi@gmail.com
 FROM openjdk:8-jdk
 
 ## MAVEN INSTALL
@@ -25,9 +25,8 @@ COPY settings-docker.xml /usr/share/maven/ref/
 #ENTRYPOINT ["/usr/local/bin/mvn-entrypoint.sh"]
 CMD ["mvn"]
 
+### COPY Files
 WORKDIR /ROOT/springbootMongoDb/
-
-# COPY Files
 COPY pom.xml ./
 COPY src ./src
 
@@ -39,9 +38,9 @@ COPY api/src ./api/src
 #RUN ./mvnw dependency:go-offline
 
 ADD /api/target/api-1.0.0-SNAPSHOT.jar api-1.0.0-snapshot.jar
-EXPOSE 8080
+EXPOSE 8081
 #CMD java -jar api-1.0.0-snapshot.jar
 
-# Define default command.
+#### Launch command.
 #CMD ["mvn", "--version"]
 CMD ["java","-jar","api-1.0.0-snapshot.jar"]
