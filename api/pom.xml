@@ -15,6 +15,9 @@
   	
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <!-- JACOCO plugins for Coverage and SONAR -->
+    <sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+    <sonar.jacoco.reportPath>${project.build.directory}/jacoco.exec</sonar.jacoco.reportPath>
   </properties>
   
   <dependencies>
@@ -97,6 +100,11 @@
 	            <groupId>org.jacoco</groupId>
 	            <artifactId>jacoco-maven-plugin</artifactId>
 	            <version>0.8.5</version>
+	            <configuration>
+	            	<append>true</append>
+	            	<destFile>${sonar.jacoco.reportPath}</destFile>
+	            	<output>file</output>
+	            </configuration>
 	            <executions>
 	                <execution>
 	                    <id>jacoco-initialize</id>
