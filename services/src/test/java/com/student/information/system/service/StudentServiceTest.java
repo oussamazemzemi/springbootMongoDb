@@ -21,7 +21,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.student.information.system.model.Student;
 import com.student.information.system.repositories.StudentRepository;
-import com.student.information.system.service.StudentService;
 import com.student.information.system.service.impl.StudentServiceImpl;
 
 /**

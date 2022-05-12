@@ -2,6 +2,8 @@ package com.student.information.system.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,11 +29,14 @@ import com.student.information.system.util.ObjectMapperUtils;
 @RequestMapping("/students")
 public class StudentRestController {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(StudentRestController.class);
+
 	@Autowired
 	private StudentService studentService;
 
 	@GetMapping(value = "/")
 	public List<StudentDTO> getAllStudents() {
+		LOGGER.info("getAllStudents");
 		return ObjectMapperUtils.mapAll(studentService.findAll(), StudentDTO.class);
 	}
 
