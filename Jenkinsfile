@@ -44,7 +44,11 @@ pipeline {
         
         stage('Nexus deploy') {
             steps {
-                bat "mvn clean deploy -DskipTests -Dmaven.install.skip=true" 
+                dir("${env.WORKSPACE}") {
+                    configFileProvider([configFile(fileId: '76967159-6fc9-4248-ba6f-fc052da7f8d3', variable: 'MAVEN_GLOBAL_SETTINGS')]) {
+                        bat "mvn -B -s ${MAVEN_GLOBAL_SETTINGS} clean deploy -DskipTests -Dmaven.install.skip=true -X" 
+                    }
+                }
             }
         }
     }
