@@ -41,5 +41,11 @@ pipeline {
                 bat "mvn sonar:sonar -Psonar -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.projectKey=${SONAR_PROJECT_NAME} -Dsonar.login=${SONAR_TOKEN}" 
             }
         }
+        
+        stage('Nexus deploy') {
+            steps {
+                bat "mvn clean deploy -DskipTests -Dmaven.install.skip=true" 
+            }
+        }
     }
 }
