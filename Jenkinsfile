@@ -1,6 +1,10 @@
 def SONAR_HOST_URL="http://localhost:9000/"
 def SONAR_PROJECT_NAME="studentinformationsystem" 
 def SONAR_TOKEN="cea794b1758519e55bbd860b51fed9a8203b0223"
+def dockerFile_api="Dockerfile"
+def image_api_name="${SONAR_PROJECT_NAME}"
+def image_api_path="${image_api_name}-snapshot:latest"
+def dockerContext="."
 
 pipeline {
     agent any
@@ -51,5 +55,28 @@ pipeline {
                 }
             }
         }
+        
+        stage('Docker build') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+                    dir("${env.WORKSPACE}") {
+                        configFileProvider([configFile(fileId: '76967159-6fc9-4248-ba6f-fc052da7f8d3', variable: 'MAVEN_GLOBAL_SETTINGS')]) {
+                            bat "docker build --force-rm -f ${dockerFile_api} --tag ${env.dockerHubUser}/${image_api_path} ${dockerContext}" 
+                        }
+                    }
+                }
+            }
+        }
+        
+        stage('Docker Push') {
+          agent any
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+                    bat "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+                    bat "docker push ${env.dockerHubUser}/${image_api_path}"
+                }
+            }
+        }
+        
     }
 }
