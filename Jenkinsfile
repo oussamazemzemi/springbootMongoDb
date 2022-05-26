@@ -15,14 +15,54 @@ pipeline {
     }
 
     stages {
+        stage('Setup parameters') {
+            steps {
+                script { 
+                    properties([
+                        parameters([
+                            choice(
+                                choices: ['-SNAPSHOT', 'RELEASE'], 
+                                name: 'AS'
+                            ),
+                            booleanParam(
+                                defaultValue: false, 
+                                description: 'Ignore Failed Junit Tests', 
+                                name: 'BOOLEAN'
+                            ),
+                            text(
+                                defaultValue: '''
+                                this is a multi-line 
+                                string parameter example
+                                ''', 
+                                 name: 'MULTI-LINE-STRING'
+                            ),
+                            string(
+                                defaultValue: 'scriptcrunch', 
+                                name: 'STRING-PARAMETER', 
+                                trim: true
+                            )
+                        ])
+                    ])
+                }
+            }
+        }
+        
         stage('Build') {
             steps {
+                //prepare choices
+                script{
+                    echo "aze=${AS}"
+    				if (AS.equals("RELEASE")){
+    					image_api_path="${image_api_name}:latest"
+    				}
+                }
+			
                 // Get some code from a GitHub repository
                 git 'https://github.com/oussamazemzemi/springbootMongoDb.git'
 
                 // (bat: Windows Batch Script or sh: Shell Script) =>  Run Maven on a Unix agent.
                 //to ignore TEST add: -Dmaven.test.failure.ignore=true
-                bat "mvn clean package" 
+                bat "mvn clean package -Dmaven.test.failure.ignore=${BOOLEAN}" 
 
                 // To run Maven on a Windows agent, use
                 // bat "mvn -Dmaven.test.failure.ignore=true clean package"
